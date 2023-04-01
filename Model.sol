@@ -104,4 +104,10 @@ library model {
         address broadcaster;
         bool claimed;
     }
+
+    struct ContentVo {
+        Content content;
+        RequestQualification requestQualification;
+        ClaimQualification claimQualification;
+    }
 }

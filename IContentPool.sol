@@ -14,7 +14,7 @@ interface IContentPool {
     function publishContent(model.PublishContentDto memory dto) external;
 
     // 获取内容详情
-    function getContent(uint256 _contentId) external view returns (model.Content memory _content);
+    function getContent(uint256 _contentId) external view returns (model.ContentVo memory _content);
 
     // 申请广播内容
     function requestBroadcast(uint256 _contentId) external;

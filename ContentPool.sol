@@ -160,9 +160,19 @@ contract ContentPool is IContentPool, IStaking {
     }
 
     // 获取内容详情
-    function getContent(uint256 _contentId) public view override returns (model.Content memory _content) {
+    function getContent(uint256 _contentId) public view override returns (model.ContentVo memory _content) {
         require(_contentId > 0 && _contentId <= contents.length, "Invalid content id");
-        return contents[_contentId - 1];
+        model.Content memory content = contents[_contentId - 1];
+        _content.content = content;
+        if (content.data.requestQualificationId > 0) {
+            model.RequestQualification memory requestQualification = requestQualifications[content.data.requestQualificationId - 1];
+            _content.requestQualification = requestQualification;
+        }
+        if (content.data.claimQualificationId > 0) {
+            model.ClaimQualification memory claimQualification = claimQualifications[content.data.claimQualificationId - 1];
+            _content.claimQualification =claimQualification;
+        }
+        return _content;
     }
 
     // 分页查询内容数据
